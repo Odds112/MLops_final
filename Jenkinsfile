@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'pytest tests/ --junitxml=results.xml'
+                sh 'source venv/bin/activate && pytest tests/ --junitxml=results.xml'
             }
         }
         stage('Build Docker Image') {
