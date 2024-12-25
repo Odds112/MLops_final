@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Run Model Training') {
             steps {
-                sh 'python src/train.py'
+                sh '. venv/bin/activate && python src/train.py'
             }
         }
         stage('Run Tests') {
