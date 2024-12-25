@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "ml_project_final"
+        DOCKER_IMAGE = "mlops_final"
         REGISTRY = "docker.io/odds112"
     }
 
