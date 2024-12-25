@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "mlops_final"
-        REGISTRY = "docker.io/odds112"
+        DOCKER_USERNAME = credentials('docker-credentials')
     }
 
     stages {
@@ -28,15 +27,20 @@ pipeline {
                 sh '. venv/bin/activate && pytest tests/ --junitxml=results.xml'
             }
         }
-        stage('Build Docker Image') {
+        stage('Login to Docker Hub') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                // Выполняем вход в Docker Hub
+                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
             }
         }
-        stage('Push Docker Image') {
+        stage('Build and Push Docker Image') {
             steps {
-                sh 'docker tag $DOCKER_IMAGE $REGISTRY/$DOCKER_IMAGE:latest'
-                sh 'docker push $REGISTRY/$DOCKER_IMAGE:latest'
+                // Сборка Docker-образа
+                sh 'docker build -t odds112/mlops_final .'
+                // Тегирование образа
+                sh 'docker tag odds112/mlops_final docker.io/odds112/mlops_final:latest'
+                // Загрузка образа в Docker Hub
+                sh 'docker push docker.io/odds112/mlops_final:latest'
             }
         }
     }
