@@ -6,7 +6,7 @@
 
 - [Описание](#описание)
 - [Структура проекта](#структура-проекта)
-- [Docker Hub](#ссылка)
+- [Docker Hub](#Ссылка-на-DockerHub)
 
 
 ## Описание
@@ -24,6 +24,6 @@
 - `requirements.txt`: Список зависимостей Python.
 - `test_image.png`: Тестовое изображение для проверки модели.
 
-## Ссылка на docker hub
+## Ссылка на DockerHub
 
 https://hub.docker.com/repository/docker/odds112/mlops_final
